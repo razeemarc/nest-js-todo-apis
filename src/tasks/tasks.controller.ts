@@ -5,7 +5,8 @@ import {
     Post,
     Patch,
     Param,
-    ParseIntPipe
+    ParseIntPipe,
+    Delete
 } from '@nestjs/common';
 import { UpdateTaskDto } from './dto/update-task.dto'
 
@@ -44,5 +45,12 @@ findOne(
   @Param('id', ParseIntPipe) id: number,
 ): Task {
   return this.tasksService.findOne(id);
+}
+
+@Delete(':id')
+remove(
+  @Param('id', ParseIntPipe) id: number,
+): { message: string } {
+  return this.tasksService.remove(id);
 }
 }

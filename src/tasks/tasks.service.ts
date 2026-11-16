@@ -55,5 +55,25 @@ findOne(id: number): Task {
 
   return task;
 }
+remove(id: number): { message: string } {
+  // Find the index of the task
+  const taskIndex = this.tasks.findIndex(
+    (task) => task.id === id,
+  );
+
+  // Check whether the task exists
+  if (taskIndex === -1) {
+    throw new NotFoundException(
+      `Task with ID ${id} not found`,
+    );
+  }
+
+  // Remove the task from the array
+  this.tasks.splice(taskIndex, 1);
+
+  return {
+    message: `Task with ID ${id} deleted successfully`,
+  };
+}
 
 }
